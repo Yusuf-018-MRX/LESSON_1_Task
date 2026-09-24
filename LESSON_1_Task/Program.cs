@@ -1,7 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Xml;
 public class program
 {
     public static void Create1()
@@ -41,30 +39,38 @@ public class program
         // dersde yazdim codeni windows from acilmadi(admin parol isteyirdi) ona gorem app da yazdim 
         Thread.CurrentThread.Name = "Task_Lesson_1";
         Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId} ");
-        //Console.WriteLine(Thread.CurrentThread.Name);
-        Process[] systemProcesses = Process.GetProcessesByName("");
-        if (systemProcesses.Length > 0)
+        Process[] systemProcesses = Process.GetProcesses();
+        //if (systemProcesses.Length > 0)
+        //{
+        //    Process Proc = systemProcesses[0];
+        //    Console.WriteLine($"Process Name: {Proc.ProcessName}");
+        //    Console.WriteLine($"Process ID : {Proc.Id}");
+        //    Console.WriteLine($"Handle Count: {Proc.HandleCount}");
+        //}
+        //else
+        //{
+        //    Console.WriteLine("Error: System NOt founded !!!!");
+        //}
+
+        foreach (Process p in systemProcesses)
         {
-            Process Proc = systemProcesses[0];
-            Console.WriteLine($"Process Name: {Proc.ProcessName}");
-            Console.WriteLine($"Process ID : {Proc.Id}");
-            Console.WriteLine($"Handle Count: {Proc.HandleCount}");
-        }
-        else
-        {
-            Console.WriteLine("Error: System NOt founded !!!!");
+            Console.WriteLine($"Name: {p.ProcessName}");
+            Console.WriteLine($"Id: {p.Id}");
+            Console.WriteLine($"Handle Count: {p.HandleCount}");
+            Console.WriteLine($"Thread Count: {p.Threads.Count}");
+            Console.WriteLine($"Machine Name: {p.MachineName}");
         }
 
-        Thread t = new Thread(() =>
-        {
-            Console.WriteLine("System islyir .");
-        });
-        t.Start();
-        Process Proces1 = Process.GetCurrentProcess();
-        int threadCount = Proces1.Threads.Count;
-        Console.WriteLine($"Proces name : {Proces1.ProcessName}");
-        Console.WriteLine($"Thread count : {threadCount}");
-        t.Join();
+        //Thread t = new Thread(() =>
+        //{
+        //    Console.WriteLine("System islyir .");
+        //});
+        //t.Start();
+        //Process Proces1 = Process.GetCurrentProcess();
+        //int threadCount = Proces1.Threads.Count;
+        //Console.WriteLine($"Proces name : {Proces1.ProcessName}");
+        //Console.WriteLine($"Thread count : {threadCount}");
+        //t.Join();
         //0000000000000000000000000000000000000000000000    
         while (true)
         {
